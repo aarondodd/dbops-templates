@@ -94,7 +94,7 @@ i.e.:
                         "autocommit": "1",
                         "general_log": "1",
                         "sql_mode": "IGNORE_SPACE",
-                        "max_allowed_packet": 1024
+                        "max_allowed_packet": 16777216
                     }
                 }
             }
