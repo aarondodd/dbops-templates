@@ -1,0 +1,94 @@
+{
+  "AWSTemplateFormatVersion" : "2010-09-09",
+
+  "Description" : "AWS CloudFormation Sample Template RDS_with_DBParameterGroup: Sample template showing how to create an Amazon RDS Database Instance with a DBParameterGroup.**WARNING** This template creates an Amazon Relational Database Service database instance. You will be billed for the AWS resources used if you create a stack from this template.",
+
+  "Parameters": {
+    "DBName": {
+      "Default": "AaronsDB",
+      "Description" : "The database name",
+      "Type": "String",
+      "MinLength": "1",
+      "MaxLength": "64",
+      "AllowedPattern" : "[a-zA-Z][a-zA-Z0-9]*",
+      "ConstraintDescription" : "must begin with a letter and contain only alphanumeric characters."
+    },
+
+    "DBUser": {
+      "NoEcho": "true",
+      "Description" : "The database admin account username",
+      "Type": "String",
+      "MinLength": "1",
+      "MaxLength": "16",
+      "AllowedPattern" : "[a-zA-Z][a-zA-Z0-9]*",
+      "ConstraintDescription" : "must begin with a letter and contain only alphanumeric characters."
+    },
+
+    "DBPassword": {
+      "NoEcho": "true",
+      "Description" : "The database admin account password",
+      "Type": "String",
+      "MinLength": "8",
+      "MaxLength": "41",
+      "AllowedPattern" : "[a-zA-Z0-9]*",
+      "ConstraintDescription" : "must contain only alphanumeric characters."
+    },
+
+    "DbInstanceType": {
+      "Default": "db.t2.small",
+      "Description" : "The RDS instance type, i.e. db.t2.small",
+      "Type": "String",
+      "MinLength": "8",
+      "MaxLength": "41"
+    },
+
+    "EngineVersion": {
+      "Default": "8.0.28",
+      "Description" : "The supported MySQL 8.x version from https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Concepts.VersionMgmt.html",
+      "Type": "String",
+      "MinLength": "1",
+      "MaxLength": "64"
+    }
+  },
+
+  "Resources" : {
+    "MyDB" : {
+      "Type" : "AWS::RDS::DBInstance",
+      "Properties" : {
+        "DBName" : { "Ref" : "DBName" },
+        "AllocatedStorage" : "5",
+        "DBInstanceClass" : { "Ref" : "DbInstanceType" },
+        "Engine" : "MySQL",
+        "EngineVersion" : { "Ref" : "EngineVersion" },
+        "MasterUsername" : { "Ref" : "DBUser" },
+        "MasterUserPassword" : { "Ref" : "DBPassword" },
+        "DBParameterGroupName" : { "Ref" : "MyRDSParamGroup" }
+      }
+    },
+
+    "MyRDSParamGroup" : {
+      "Type": "AWS::RDS::DBParameterGroup",
+      "Properties" : {
+        "Family" : "MySQL8.0",
+        "Description" : "CloudFormation Sample Database Parameter Group",
+          "Parameters" : {
+            "autocommit" : "1" ,
+            "general_log" : "1"
+        }
+      }
+    }
+  },
+
+  "Outputs" : {
+    "JDBCConnectionString": {
+      "Description" : "JDBC connection string for the database",
+      "Value" : { "Fn::Join": [ "", [ "jdbc:mysql://",
+                                      { "Fn::GetAtt": [ "MyDB", "Endpoint.Address" ] },
+                                      ":",
+                                      { "Fn::GetAtt": [ "MyDB", "Endpoint.Port" ] },
+                                      "/",
+                                      { "Ref": "DBName" }]]}
+    }
+  }
+}
+

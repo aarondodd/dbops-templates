@@ -1,0 +1,18 @@
+[
+    { 
+        "ParameterKey" : "DBName" , 
+        "UsePreviousValue" : true
+    },{ 
+        "ParameterKey" : "DBUser" , 
+        "UsePreviousValue" : true
+    },{ 
+        "ParameterKey" : "DBPassword" , 
+        "UsePreviousValue" : true
+    },{ 
+        "ParameterKey" : "DbInstanceType" , 
+        "UsePreviousValue" : true
+    },{ 
+        "ParameterKey" : "EngineVersion" , 
+        "UsePreviousValue" : true
+    } 
+] 

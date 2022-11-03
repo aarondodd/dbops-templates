@@ -1,0 +1,18 @@
+[
+    { 
+        "ParameterKey" : "DBName" , 
+        "UsePreviousValue" : true
+    },{ 
+        "ParameterKey" : "DBUser" , 
+        "UsePreviousValue" : true
+    },{ 
+        "ParameterKey" : "DBPassword" , 
+        "UsePreviousValue" : true
+    },{ 
+        "ParameterKey" : "DbInstanceType" , 
+        "ParameterValue" : "db.t2.medium" 
+    },{ 
+        "ParameterKey" : "EngineVersion" , 
+        "ParameterValue" : "8.0.30" 
+    } 
+] 

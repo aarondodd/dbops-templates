@@ -1,0 +1,18 @@
+[
+    { 
+        "ParameterKey" : "DBName" , 
+        "ParameterValue" : "AaronTest1" 
+    },{ 
+        "ParameterKey" : "DBUser" , 
+        "ParameterValue" : "admin" 
+    },{ 
+        "ParameterKey" : "DBPassword" , 
+        "ParameterValue" : "Password01" 
+    },{ 
+        "ParameterKey" : "DbInstanceType" , 
+        "ParameterValue" : "db.t2.small" 
+    },{ 
+        "ParameterKey" : "EngineVersion" , 
+        "ParameterValue" : "8.0.28" 
+    } 
+] 
